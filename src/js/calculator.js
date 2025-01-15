@@ -1,7 +1,7 @@
 let display = document.getElementById("display");
 let currentInput = "";
-let operator = "";
 let firstOperand = null;
+let operator = "";
 
 
 function addDisplay(value) {
@@ -9,31 +9,54 @@ function addDisplay(value) {
   display.value = currentInput;
 }
 
-document.getElementById("plus").addEventListener("click", function () {
-  if (currentInput) {
-    firstOperand = parseFloat(currentInput);
-    operator = "+";
-    currentInput = ""; 
-  }
-});
 
-document.getElementById("equals").addEventListener("click", function () {
+function clearCalculator() {
+  currentInput = "";
+  firstOperand = null;
+  operator = "";
+  display.value = "";
+}
+
+
+function add(a, b) {
+  return a + b;
+}
+
+
+function subtract(a, b) {
+  return a - b;
+}
+
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  if (b === 0) {
+    return "Error"; 
+  }
+  return a / b;
+}
+
+
+function evaluateExpression() {
   if (firstOperand !== null && currentInput) {
-    let secondOperand = parseFloat(currentInput);
+    const secondOperand = parseFloat(currentInput);
     let result;
 
     switch (operator) {
       case "+":
-        result = firstOperand + secondOperand;
+        result = add(firstOperand, secondOperand);
         break;
       case "-":
-        result = firstOperand - secondOperand;
+        result = subtract(firstOperand, secondOperand);
         break;
       case "*":
-        result = firstOperand * secondOperand;
+        result = multiply(firstOperand, secondOperand);
         break;
       case "/":
-        result = firstOperand / secondOperand;
+        result = divide(firstOperand, secondOperand);
         break;
       default:
         return; 
@@ -41,26 +64,32 @@ document.getElementById("equals").addEventListener("click", function () {
 
     display.value = result; 
     currentInput = ""; 
-    firstOperand = null; 
+    firstOperand = result; 
     operator = ""; 
   }
+}
+
+
+document.getElementById("equals").addEventListener("click", function () {
+  evaluateExpression();
 });
 
 
 document.getElementById("clear").addEventListener("click", function () {
-  currentInput = ""; 
-  firstOperand = null; 
-  operator = ""; 
-  display.value = ""; 
+  clearCalculator();
 });
 
 
-const operators = document.querySelectorAll(".operator:not(#plus)");
+const operators = document.querySelectorAll(".operator");
 operators.forEach((op) => {
   op.addEventListener("click", function () {
     if (currentInput) {
-      firstOperand = parseFloat(currentInput);
-      operator = this.dataset.value;
+      if (firstOperand === null) {
+        firstOperand = parseFloat(currentInput); 
+      } else {
+        evaluateExpression(); 
+      }
+      operator = this.dataset.value; 
       currentInput = ""; 
     }
   });
