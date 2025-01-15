@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Calculator</title>
+    <link rel="stylesheet" href="src/css/style.css" />
+</head>
+<body>
+    <div id="calculator">
+        <input type="text" id="display" disabled />
+        <div id="buttons">
+            <button class="btn" data-value="7" onclick="addDisplay(this.dataset.value)">7</button>
+            <button class="btn" data-value="8" onclick="addDisplay(this.dataset.value)">8</button>
+            <button class="btn" data-value="9" onclick="addDisplay(this.dataset.value)">9</button>
+            <button class="btn operator" data-value="/" onclick="addDisplay(this.dataset.value)">/</button>
+
+            <button class="btn" data-value="4" onclick="addDisplay(this.dataset.value)">4</button>
+            <button class="btn" data-value="5" onclick="addDisplay(this.dataset.value)">5</button>
+            <button class="btn" data-value="6" onclick="addDisplay(this.dataset.value)">6</button>
+            <button class="btn operator" data-value="*" onclick="addDisplay(this.dataset.value)">*</button>
+
+            <button class="btn" data-value="1" onclick="addDisplay(this.dataset.value)">1</button>
+            <button class="btn" data-value="2" onclick="addDisplay(this.dataset.value)">2</button>
+            <button class="btn" data-value="3" onclick="addDisplay(this.dataset.value)">3</button>
+            <button class="btn operator" data-value="-" onclick="addDisplay(this.dataset.value)">-</button>
+
+            <button class="btn" data-value="0" onclick="addDisplay(this.dataset.value)">0</button>
+            <button class="btn operator" data-value="+" id="plus">+</button>
+            <button class="btn operator equal" id="equals">=</button>
+            <button class="btn" id="clear">C</button>
+        </div>
+    </div>
+    <script src="src/js/calculator.js"></script>
+</body>
+</html>
